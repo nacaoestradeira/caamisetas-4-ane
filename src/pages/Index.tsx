@@ -217,7 +217,7 @@ const Index = () => {
               <div className="animate-fadeUp">
                 <div className="my-6 mb-5">
                   <h2 className="font-bebas text-[26px] tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent">Montar Pedido</h2>
-                  <p className="text-[13px] text-muted mt-1">Adicione as camisetas que deseja encomendar</p>
+                  <p className="text-[13px] text-muted mt-1">Adicione quantas camisetas quiser com cores e tamanhos diferentes</p>
                 </div>
 
                 <div className="mb-4">
