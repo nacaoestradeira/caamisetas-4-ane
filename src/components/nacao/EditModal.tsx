@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { Pedido, CamisetaItem, GAS_URL, TAM_ORDEM, nomeModelo } from '@/lib/constants';
 import tabelaMangaCurta from '@/assets/tabela-manga-curta.jpg';
 import tabelaMangaLonga from '@/assets/tabela-manga-longa.jpg';
@@ -11,6 +11,20 @@ interface EditModalProps {
   onDeleted: () => void;
   showToast: (msg: string, type?: string) => void;
 }
+
+const asText = (value: unknown) => (typeof value === 'string' ? value : value == null ? '' : String(value));
+
+const Field = ({ label, required, value, onChange, id, placeholder, type = 'text', multiline = false, error = false }: any) => (
+  <div className="mb-4">
+    <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-2">{label} {required && <span className="text-gold-light">*</span>}</label>
+    {multiline ? (
+      <textarea value={asText(value)} onChange={e => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors resize-y min-h-[72px] ${error ? 'border-danger' : 'border-border focus:border-gold'}`} />
+    ) : (
+      <input type={type} value={asText(value)} onChange={e => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors ${error ? 'border-danger' : 'border-border focus:border-gold'}`} />
+    )}
+    {error && <p className="text-[11px] text-danger mt-1">Campo obrigatório.</p>}
+  </div>
+);
 
 const EditModal = ({ open, pedido, onClose, onSaved, onDeleted, showToast }: EditModalProps) => {
   const [nome, setNome] = useState('');
@@ -26,26 +40,29 @@ const EditModal = ({ open, pedido, onClose, onSaved, onDeleted, showToast }: Edi
   const [deleting, setDeleting] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
-  // Sync when pedido changes
-  const [prevPedidoId, setPrevPedidoId] = useState<number | null>(null);
-  if (pedido && pedido.id !== prevPedidoId) {
-    setPrevPedidoId(pedido.id);
-    setNome(pedido.nome);
-    setTelefone(pedido.telefone);
-    setCidade(pedido.cidade);
-    setEntrega(pedido.entrega);
-    setEndereco(pedido.endereco || '');
-    setCep(pedido.cep || '');
-    setObs(pedido.obs || '');
-    setItens(pedido.itens.map(i => ({ ...i, manga: i.manga || 'Curta' })));
+  useEffect(() => {
+    if (!open || !pedido) return;
+
+    setNome(asText(pedido.nome));
+    setTelefone(asText(pedido.telefone));
+    setCidade(asText(pedido.cidade));
+    setEntrega(asText(pedido.entrega));
+    setEndereco(asText(pedido.endereco));
+    setCep(asText(pedido.cep));
+    setObs(asText(pedido.obs));
+    setItens((pedido.itens || []).map(i => ({
+      ...i,
+      cor: asText(i.cor),
+      modelo: asText(i.modelo),
+      tamanho: asText(i.tamanho),
+      quantidade: Number(i.quantidade) || 1,
+      manga: asText(i.manga) || 'Curta',
+    })));
     setErrors({});
     setSaving(false);
     setDeleting(false);
     setConfirmDelete(false);
-  }
-  if (!pedido && prevPedidoId !== null) {
-    setPrevPedidoId(null);
-  }
+  }, [open, pedido]);
 
   const updateItem = (idx: number, field: string, value: any) => {
     setItens(prev => prev.map((it, i) => i === idx ? { ...it, [field]: field === 'quantidade' ? parseInt(value) : value } : it));
@@ -61,14 +78,22 @@ const EditModal = ({ open, pedido, onClose, onSaved, onDeleted, showToast }: Edi
   };
 
   const handleSave = async () => {
+    const nomeValue = asText(nome).trim();
+    const telefoneValue = asText(telefone).trim();
+    const cidadeValue = asText(cidade).trim();
+    const entregaValue = asText(entrega);
+    const enderecoValue = asText(endereco).trim();
+    const cepValue = asText(cep).trim();
+    const obsValue = asText(obs).trim();
+
     const errs: Record<string, boolean> = {};
-    if (!nome.trim()) errs.nome = true;
-    if (!telefone.trim()) errs.telefone = true;
-    if (!cidade.trim()) errs.cidade = true;
-    if (!entrega) errs.entrega = true;
-    if (entrega === 'Entrega no Endereço') {
-      if (!endereco.trim()) errs.endereco = true;
-      if (!cep.trim()) errs.cep = true;
+    if (!nomeValue) errs.nome = true;
+    if (!telefoneValue) errs.telefone = true;
+    if (!cidadeValue) errs.cidade = true;
+    if (!entregaValue) errs.entrega = true;
+    if (entregaValue === 'Entrega no Endereço') {
+      if (!enderecoValue) errs.endereco = true;
+      if (!cepValue) errs.cep = true;
     }
     setErrors(errs);
     if (Object.keys(errs).length) return;
@@ -76,9 +101,9 @@ const EditModal = ({ open, pedido, onClose, onSaved, onDeleted, showToast }: Edi
     setSaving(true);
     const pedidoAtualizado = {
       ...pedido,
-      nome: nome.trim(), telefone: telefone.trim(), cidade: cidade.trim(),
-      entrega, endereco: endereco.trim() || null, cep: cep.trim() || null,
-      obs: obs.trim() || null, itens, editedAt: new Date().toISOString(),
+      nome: nomeValue, telefone: telefoneValue, cidade: cidadeValue,
+      entrega: entregaValue, endereco: enderecoValue || null, cep: cepValue || null,
+      obs: obsValue || null, itens, editedAt: new Date().toISOString(),
       _action: 'edit'
     };
 
@@ -108,18 +133,6 @@ const EditModal = ({ open, pedido, onClose, onSaved, onDeleted, showToast }: Edi
 
   if (!open || !pedido) return null;
 
-  const Field = ({ label, required, value, onChange, id, placeholder, type = 'text', multiline = false }: any) => (
-    <div className="mb-4">
-      <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-2">{label} {required && <span className="text-gold-light">*</span>}</label>
-      {multiline ? (
-        <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors resize-y min-h-[72px] ${errors[id] ? 'border-danger' : 'border-border focus:border-gold'}`} />
-      ) : (
-        <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors ${errors[id] ? 'border-danger' : 'border-border focus:border-gold'}`} />
-      )}
-      {errors[id] && <p className="text-[11px] text-danger mt-1">Campo obrigatório.</p>}
-    </div>
-  );
-
   return (
     <>
       <div className={`fixed inset-0 bg-black/[.92] z-[200] flex items-end justify-center transition-opacity ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
@@ -135,9 +148,9 @@ const EditModal = ({ open, pedido, onClose, onSaved, onDeleted, showToast }: Edi
           {/* Dados pessoais */}
           <div className="bg-[#161616] border border-[#222] rounded p-4 mb-3.5">
             <div className="font-oswald text-[10px] tracking-[2px] uppercase text-gold mb-3.5 flex items-center gap-2">👤 Dados pessoais</div>
-            <Field label="Nome completo" required id="nome" value={nome} onChange={setNome} placeholder="Nome completo" />
-            <Field label="WhatsApp" required id="telefone" value={telefone} onChange={setTelefone} placeholder="(00) 00000-0000" type="tel" />
-            <Field label="Cidade e Estado" required id="cidade" value={cidade} onChange={setCidade} placeholder="Ex: Cuiabá – MT" />
+            <Field label="Nome completo" required id="nome" error={errors.nome} value={nome} onChange={setNome} placeholder="Nome completo" />
+            <Field label="WhatsApp" required id="telefone" error={errors.telefone} value={telefone} onChange={setTelefone} placeholder="(00) 00000-0000" type="tel" />
+            <Field label="Cidade e Estado" required id="cidade" error={errors.cidade} value={cidade} onChange={setCidade} placeholder="Ex: Cuiabá – MT" />
           </div>
 
           {/* Entrega */}
@@ -159,12 +172,12 @@ const EditModal = ({ open, pedido, onClose, onSaved, onDeleted, showToast }: Edi
             {errors.entrega && <p className="text-[11px] text-danger mb-2">Selecione a entrega.</p>}
             {entrega === 'Entrega no Endereço' && (
               <div className="mt-3.5 p-4 bg-[#141414] border border-dashed border-border rounded-sm">
-                <Field label="Endereço completo" required id="endereco" value={endereco} onChange={setEndereco} placeholder="Rua, número, bairro, cidade, UF" />
-                <Field label="CEP" required id="cep" value={cep} onChange={setCep} placeholder="00000-000" />
+                <Field label="Endereço completo" required id="endereco" error={errors.endereco} value={endereco} onChange={setEndereco} placeholder="Rua, número, bairro, cidade, UF" />
+                <Field label="CEP" required id="cep" error={errors.cep} value={cep} onChange={setCep} placeholder="00000-000" />
               </div>
             )}
             <div className="mt-3">
-              <Field label="Observações" id="obs" value={obs} onChange={setObs} placeholder="Observações adicionais..." multiline />
+              <Field label="Observações" id="obs" error={errors.obs} value={obs} onChange={setObs} placeholder="Observações adicionais..." multiline />
             </div>
           </div>
 
