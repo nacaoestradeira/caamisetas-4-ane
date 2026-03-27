@@ -164,7 +164,7 @@ const Index = () => {
               <div className="animate-fadeUp">
                 <div className="my-6 mb-5">
                   <h2 className="font-bebas text-[26px] tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent">Identificação</h2>
-                  <p className="text-[13px] text-muted mt-1">Preencha seus dados para registrar o pedido</p>
+                  <p className="text-[13px] text-muted mt-1">Seus dados para registro e contato sobre o pedido</p>
                 </div>
 
                 <Field label="Nome completo" required id="nome" value={nome} onChange={setNome} placeholder="Seu nome completo" />
