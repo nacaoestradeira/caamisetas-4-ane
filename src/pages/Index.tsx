@@ -198,8 +198,8 @@ const Index = () => {
                       <span>📦</span>
                        <div><strong className="text-gold-light block mb-1">Atenção — Envio pelos Correios</strong>O valor da camiseta será cobrado para confecção. O frete será calculado após a confirmação e informado via WhatsApp — deverá ser pago separadamente antes do envio.</div>
                     </div>
-                    <Field label="Endereço completo" required id="endereco" value={endereco} onChange={setEndereco} placeholder="Rua, número, bairro, cidade, UF" />
-                    <Field label="CEP" required id="cep" value={cep} onChange={setCep} placeholder="00000-000" />
+                    <Field label="Endereço completo" required error={errors.endereco} value={endereco} onChange={setEndereco} placeholder="Rua, número, bairro, cidade, UF" />
+                    <Field label="CEP" required error={errors.cep} value={cep} onChange={setCep} placeholder="00000-000" />
                   </div>
                 )}
 
