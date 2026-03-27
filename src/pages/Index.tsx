@@ -300,7 +300,7 @@ const Index = () => {
         {/* SUCCESS */}
         {page === 'form' && showSuccess && (
           <div className="text-center py-16 px-6 animate-fadeUp">
-            <div className="text-7xl mb-5">🎉</div>
+            <div className="text-7xl mb-5">🏍️</div>
             <h2 className="font-bebas text-4xl tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent mb-3">Pedido Registrado!</h2>
             <p className="text-sm text-[#9a8a6a] leading-relaxed max-w-[340px] mx-auto mb-2.5">
               Obrigado, <strong>{nome.split(' ')[0]}</strong>! Seu pedido de camisetas foi registrado com sucesso.
