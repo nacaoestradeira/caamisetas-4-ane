@@ -92,9 +92,6 @@ const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps
           <div className="grid grid-cols-1 gap-2">
             {['Masculino', 'Feminino', 'Infantil'].map(m => (
               <RadioOption key={m} name="m-modelo" value={m} checked={modelo === m} onChange={setModelo}>
-                <span className="w-4 h-4 border-2 border-[#444] rounded-full flex-shrink-0 flex items-center justify-center" style={modelo === m ? { borderColor: 'hsl(40,73%,47%)', background: 'hsl(40,73%,47%)' } : {}}>
-                  {modelo === m && <span className="w-1.5 h-1.5 bg-[#0a0a0a] rounded-full" />}
-                </span>
                 {m}
               </RadioOption>
             ))}
