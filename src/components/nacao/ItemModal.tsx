@@ -81,8 +81,7 @@ const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps
 
         <div className="mb-4">
           <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-2">Cor</label>
-          <div className="flex items-center gap-2.5 bg-gold/[.07] border-[1.5px] border-gold/30 rounded-sm px-3 py-2.5 text-sm text-gold-light font-oswald tracking-[1px] uppercase">
-            <span className="w-5 h-5 rounded-full border-2 border-[#555] bg-[#111] flex-shrink-0" />
+          <div className="bg-gold/[.07] border-[1.5px] border-gold/30 rounded-sm px-3 py-2.5 text-sm text-gold-light font-oswald tracking-[1px] uppercase">
             Camiseta Oficial Preta
           </div>
         </div>
