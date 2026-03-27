@@ -181,11 +181,8 @@ const EditModal = ({ open, pedido, onClose, onSaved, onDeleted, showToast }: Edi
                 {/* Cor - always Preta */}
                 <div className="mb-3">
                   <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-1.5">Cor</label>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="flex items-center gap-2 bg-gold/[.07] border-[1.5px] border-gold rounded-sm px-3 py-2 text-sm text-gold-light">
-                      <span className="w-5 h-5 rounded-full border-2 border-[#555] bg-[#111]" />
-                      Preta
-                    </div>
+                  <div className="bg-gold/[.07] border-[1.5px] border-gold/30 rounded-sm px-3 py-2.5 text-sm text-gold-light font-oswald tracking-[1px] uppercase">
+                    Camiseta Oficial Preta
                   </div>
                 </div>
 
