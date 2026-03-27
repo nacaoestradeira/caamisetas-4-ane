@@ -35,7 +35,7 @@ const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps
 
   const handleSave = () => {
     const errs: Record<string, boolean> = {};
-    if (!cor) errs.cor = true;
+    // cor is always 'Preta', no validation needed
     if (!modelo) errs.modelo = true;
     if (!tamanho) errs.tamanho = true;
     if (!quantidade) errs.quantidade = true;
