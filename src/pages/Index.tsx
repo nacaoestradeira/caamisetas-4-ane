@@ -307,6 +307,21 @@ const Index = () => {
             <p className="text-sm text-[#9a8a6a] leading-relaxed max-w-[340px] mx-auto mb-2.5">
               Obrigado, <strong>{nome.split(' ')[0]}</strong>! Seu pedido foi salvo. Entraremos em contato pelo WhatsApp para confirmar os detalhes.
             </p>
+
+            {/* Avisos de custo */}
+            <div className="max-w-[380px] mx-auto mb-5 space-y-2.5">
+              <div className="flex gap-2.5 items-start bg-gold/[.08] border border-gold/30 rounded p-3 text-xs text-[#c0a060] leading-relaxed text-left">
+                <span>📦</span>
+                <div><strong className="text-gold-light block mb-1">Custo de transporte até Teresina</strong>As camisetas serão confeccionadas e despachadas para Teresina/PI. Haverá um custo adicional de transporte que será informado via WhatsApp.</div>
+              </div>
+              {entrega === 'Entrega no Endereço' && (
+                <div className="flex gap-2.5 items-start bg-gold/[.08] border border-gold/30 rounded p-3 text-xs text-[#c0a060] leading-relaxed text-left">
+                  <span>🚚</span>
+                  <div><strong className="text-gold-light block mb-1">Custo de envio pelos Correios</strong>Além do transporte até Teresina, haverá o custo de despacho pelos Correios até o endereço informado. O frete será calculado e informado via WhatsApp antes do envio.</div>
+                </div>
+              )}
+            </div>
+
             <p className="text-sm text-[#555] leading-relaxed max-w-[340px] mx-auto mb-6">
               Até o 4º Encontro Nacional Nação Estradeira!<br />04 a 07 de junho de 2026 · Teresina/PI 🤘
             </p>
