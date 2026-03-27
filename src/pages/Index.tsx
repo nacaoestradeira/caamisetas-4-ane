@@ -134,7 +134,7 @@ const Index = () => {
           onClick={() => switchPage('form')}
           className={`flex-1 py-3.5 px-2 font-oswald text-[13px] font-semibold tracking-[2px] uppercase bg-transparent border-none cursor-pointer border-b-2 -mb-[2px] transition-colors ${page === 'form' ? 'text-gold-light border-gold-light' : 'text-muted border-transparent'}`}
         >
-          📋 Formulário
+          📋 Fazer Pedido
         </button>
         <button
           onClick={() => switchPage('consolidado')}
