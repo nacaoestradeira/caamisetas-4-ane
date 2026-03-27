@@ -14,10 +14,9 @@ const Header = () => (
     <p className="relative z-10 mt-2.5 text-[13px] text-[#9a8a6a] leading-relaxed max-w-[380px] mx-auto">
       Intenção de compra das camisetas do 4º Aniversário Nação Estradeira.
     </p>
-    <div className="mt-3 flex justify-center gap-2 flex-wrap">
-      <span className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 rounded-sm px-3.5 py-1.5 font-oswald text-[12px] tracking-[2px] uppercase text-gold">
-        <span className="w-3.5 h-3.5 rounded-full border-[1.5px] border-[#555] bg-[#111] inline-block" />
-        Preta
+    <div className="mt-3 flex justify-center">
+      <span className="font-oswald text-[12px] tracking-[3px] uppercase text-gold font-medium">
+        Modelo Oficial — Camiseta Preta Sublimada
       </span>
     </div>
 

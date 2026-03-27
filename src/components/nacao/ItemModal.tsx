@@ -27,7 +27,7 @@ const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps
         setQuantidade(String(initial.quantidade));
         setManga(initial.manga || 'Curta');
       } else {
-        setCor(''); setModelo(''); setTamanho(''); setQuantidade(''); setManga('');
+        setCor('Preta'); setModelo(''); setTamanho(''); setQuantidade(''); setManga('');
       }
       setErrors({});
     }
@@ -35,7 +35,7 @@ const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps
 
   const handleSave = () => {
     const errs: Record<string, boolean> = {};
-    if (!cor) errs.cor = true;
+    // cor is always 'Preta', no validation needed
     if (!modelo) errs.modelo = true;
     if (!tamanho) errs.tamanho = true;
     if (!quantidade) errs.quantidade = true;
@@ -80,14 +80,11 @@ const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps
         </h3>
 
         <div className="mb-4">
-          <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-2">Cor <span className="text-gold-light">*</span></label>
-          <div className="grid grid-cols-2 gap-2">
-            <RadioOption name="m-cor" value="Preta" checked={cor === 'Preta'} onChange={setCor}>
-              <span className="w-5 h-5 rounded-full border-2 border-[#555] bg-[#111] flex-shrink-0" />
-              Preta
-            </RadioOption>
+          <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-2">Cor</label>
+          <div className="flex items-center gap-2.5 bg-gold/[.07] border-[1.5px] border-gold/30 rounded-sm px-3 py-2.5 text-sm text-gold-light font-oswald tracking-[1px] uppercase">
+            <span className="w-5 h-5 rounded-full border-2 border-[#555] bg-[#111] flex-shrink-0" />
+            Camiseta Oficial Preta
           </div>
-          <ErrMsg show={!!errors.cor} text="Selecione a cor." />
         </div>
 
         <div className="mb-4">
