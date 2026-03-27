@@ -19,6 +19,15 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        black: "hsl(var(--black))",
+        dark: "hsl(var(--dark))",
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          light: "hsl(var(--gold-light))",
+          shine: "hsl(var(--gold-shine))",
+        },
+        danger: "hsl(var(--danger))",
+        success: "hsl(var(--green))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -44,7 +53,7 @@ export default {
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
+          DEFAULT: "hsl(var(--card-bg))",
           foreground: "hsl(var(--card-foreground))",
         },
         sidebar: {
@@ -58,6 +67,11 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
+      fontFamily: {
+        bebas: ["'Bebas Neue'", "sans-serif"],
+        oswald: ["'Oswald'", "sans-serif"],
+        barlow: ["'Barlow'", "sans-serif"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -65,20 +79,12 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
