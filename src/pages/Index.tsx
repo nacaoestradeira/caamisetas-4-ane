@@ -176,7 +176,7 @@ const Index = () => {
                     Entrega <span className="text-gold-light">*</span>
                   </label>
                   <div className="grid grid-cols-1 gap-2">
-                    {[['Retirada no Evento', '📍 Retirar no Evento (Teresina/PI)'], ['Entrega no Endereço', '🚚 Receber no endereço (Correios)']].map(([val, label]) => (
+                    {[['Retirada no Evento', '📍 Retirar no Evento (Teresina/PI – junho/2026)'], ['Entrega no Endereço', '🚚 Receber no meu endereço (Correios)']].map(([val, label]) => (
                       <div key={val} className="relative">
                         <input type="radio" name="entrega" value={val} checked={entrega === val} onChange={() => setEntrega(val)} className="absolute opacity-0 w-0 h-0 peer" id={`ent-${val}`} />
                         <label htmlFor={`ent-${val}`} className="flex items-center gap-2.5 bg-[#161616] border-[1.5px] border-border rounded-sm px-3 py-3 cursor-pointer text-sm font-medium text-[#c0b090] transition-all peer-checked:border-gold peer-checked:bg-gold/[.07] peer-checked:text-gold-light">
