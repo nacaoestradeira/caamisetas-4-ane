@@ -254,8 +254,8 @@ const Index = () => {
             {step === 3 && (
               <div className="animate-fadeUp">
                 <div className="my-6 mb-5">
-                  <h2 className="font-bebas text-[26px] tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent">Revisão</h2>
-                  <p className="text-[13px] text-muted mt-1">Confira todos os dados antes de confirmar</p>
+                  <h2 className="font-bebas text-[26px] tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent">Confirmar Pedido</h2>
+                  <p className="text-[13px] text-muted mt-1">Verifique todos os dados antes de enviar</p>
                 </div>
 
                 <div className="bg-card border border-border rounded overflow-hidden mb-3.5">
