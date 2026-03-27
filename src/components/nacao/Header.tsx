@@ -20,6 +20,25 @@ const Header = () => (
         Preta
       </span>
     </div>
+
+    {/* Modelo da camiseta */}
+    <div className="mt-5 space-y-3 max-w-[480px] mx-auto">
+      <div className="rounded overflow-hidden border border-gold/20">
+        <img
+          src="/modelo-camiseta-preta.jpg"
+          alt="Modelo completo da camiseta preta – frente, costas e mangas"
+          className="w-full h-auto"
+        />
+      </div>
+      <div className="rounded overflow-hidden border border-gold/20">
+        <img
+          src="/frente-camiseta-preta.jpg"
+          alt="Detalhe da frente da camiseta preta – 4º A.N.E. Teresina-PI"
+          className="w-full h-auto"
+        />
+      </div>
+      <p className="text-[11px] text-muted text-center tracking-wide">Modelo oficial — camiseta preta sublimada</p>
+    </div>
   </div>
 );
 
