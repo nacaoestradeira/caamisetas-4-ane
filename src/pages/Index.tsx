@@ -305,10 +305,10 @@ const Index = () => {
             <div className="text-7xl mb-5">🏍️</div>
             <h2 className="font-bebas text-4xl tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent mb-3">Pedido Registrado!</h2>
             <p className="text-sm text-[#9a8a6a] leading-relaxed max-w-[340px] mx-auto mb-2.5">
-              Obrigado, <strong>{nome.split(' ')[0]}</strong>! Seu pedido de camisetas foi registrado com sucesso.
+              Obrigado, <strong>{nome.split(' ')[0]}</strong>! Seu pedido foi salvo. Entraremos em contato pelo WhatsApp para confirmar os detalhes.
             </p>
-            <p className="text-sm text-[#9a8a6a] leading-relaxed max-w-[340px] mx-auto mb-6">
-              Você será contatado via WhatsApp para confirmar o pagamento.
+            <p className="text-sm text-[#555] leading-relaxed max-w-[340px] mx-auto mb-6">
+              Até o 4º Encontro Nacional Nação Estradeira!<br />04 a 07 de junho de 2026 · Teresina/PI 🤘
             </p>
             <div className="flex flex-col gap-3 items-center">
               <button onClick={() => switchPage('consolidado')} className="inline-flex items-center gap-2 bg-gold/10 border-[1.5px] border-gold rounded-sm px-6 py-3.5 text-gold font-oswald text-sm tracking-[2px] uppercase cursor-pointer hover:bg-gold/[.18] transition-colors">
