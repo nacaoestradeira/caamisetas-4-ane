@@ -168,9 +168,9 @@ const Index = () => {
                   <p className="text-[13px] text-muted mt-1">Seus dados para registro e contato sobre o pedido</p>
                 </div>
 
-                <Field label="Nome completo" required id="nome" value={nome} onChange={setNome} placeholder="Seu nome completo" />
-                <Field label="WhatsApp" required id="telefone" value={telefone} onChange={setTelefone} placeholder="(00) 00000-0000" type="tel" />
-                <Field label="Cidade e Estado" required id="cidade" value={cidade} onChange={setCidade} placeholder="Ex: Cuiabá – MT" />
+                <Field label="Nome completo" required error={errors.nome} value={nome} onChange={setNome} placeholder="Seu nome completo" />
+                <Field label="WhatsApp" required error={errors.telefone} value={telefone} onChange={setTelefone} placeholder="(00) 00000-0000" type="tel" />
+                <Field label="Cidade e Estado" required error={errors.cidade} value={cidade} onChange={setCidade} placeholder="Ex: Cuiabá – MT" />
 
                 <div className="mb-4">
                   <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-2">
