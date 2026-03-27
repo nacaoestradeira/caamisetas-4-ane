@@ -134,7 +134,7 @@ const Index = () => {
           onClick={() => switchPage('form')}
           className={`flex-1 py-3.5 px-2 font-oswald text-[13px] font-semibold tracking-[2px] uppercase bg-transparent border-none cursor-pointer border-b-2 -mb-[2px] transition-colors ${page === 'form' ? 'text-gold-light border-gold-light' : 'text-muted border-transparent'}`}
         >
-          📋 Formulário
+          📋 Fazer Pedido
         </button>
         <button
           onClick={() => switchPage('consolidado')}
@@ -164,7 +164,7 @@ const Index = () => {
               <div className="animate-fadeUp">
                 <div className="my-6 mb-5">
                   <h2 className="font-bebas text-[26px] tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent">Identificação</h2>
-                  <p className="text-[13px] text-muted mt-1">Preencha seus dados para registrar o pedido</p>
+                  <p className="text-[13px] text-muted mt-1">Seus dados para registro e contato sobre o pedido</p>
                 </div>
 
                 <Field label="Nome completo" required id="nome" value={nome} onChange={setNome} placeholder="Seu nome completo" />
@@ -176,7 +176,7 @@ const Index = () => {
                     Entrega <span className="text-gold-light">*</span>
                   </label>
                   <div className="grid grid-cols-1 gap-2">
-                    {[['Retirada no Evento', '📍 Retirar no Evento (Teresina/PI)'], ['Entrega no Endereço', '🚚 Receber no endereço (Correios)']].map(([val, label]) => (
+                    {[['Retirada no Evento', '📍 Retirar no Evento (Teresina/PI – junho/2026)'], ['Entrega no Endereço', '🚚 Receber no meu endereço (Correios)']].map(([val, label]) => (
                       <div key={val} className="relative">
                         <input type="radio" name="entrega" value={val} checked={entrega === val} onChange={() => setEntrega(val)} className="absolute opacity-0 w-0 h-0 peer" id={`ent-${val}`} />
                         <label htmlFor={`ent-${val}`} className="flex items-center gap-2.5 bg-[#161616] border-[1.5px] border-border rounded-sm px-3 py-3 cursor-pointer text-sm font-medium text-[#c0b090] transition-all peer-checked:border-gold peer-checked:bg-gold/[.07] peer-checked:text-gold-light">
@@ -195,14 +195,14 @@ const Index = () => {
                   <div className="mt-3.5 p-4 bg-[#141414] border border-dashed border-border rounded-sm animate-fadeUp">
                     <div className="flex gap-2.5 items-start bg-gold/[.08] border border-gold/30 rounded p-3 mb-3.5 text-xs text-[#c0a060] leading-relaxed">
                       <span>📦</span>
-                      <div><strong className="text-gold-light block mb-1">Envio pelos Correios</strong>O frete será calculado separadamente e informado via WhatsApp após o pedido.</div>
+                       <div><strong className="text-gold-light block mb-1">Atenção — Envio pelos Correios</strong>O valor da camiseta será cobrado para confecção. O frete será calculado após a confirmação e informado via WhatsApp — deverá ser pago separadamente antes do envio.</div>
                     </div>
                     <Field label="Endereço completo" required id="endereco" value={endereco} onChange={setEndereco} placeholder="Rua, número, bairro, cidade, UF" />
                     <Field label="CEP" required id="cep" value={cep} onChange={setCep} placeholder="00000-000" />
                   </div>
                 )}
 
-                <Field label="Observações" id="obs" value={obs} onChange={setObs} placeholder="Alguma observação especial?" multiline />
+                {/* Observações moved to Step 3 */}
 
                 <div className="flex gap-2.5 mt-7">
                   <button onClick={() => goTo(2)} className="flex-1 py-4 bg-gradient-to-br from-gold to-gold-light text-[#0a0a0a] font-oswald text-[15px] font-bold tracking-[2px] uppercase rounded-sm cursor-pointer transition-opacity hover:opacity-90 active:scale-[.98]">
@@ -217,7 +217,7 @@ const Index = () => {
               <div className="animate-fadeUp">
                 <div className="my-6 mb-5">
                   <h2 className="font-bebas text-[26px] tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent">Montar Pedido</h2>
-                  <p className="text-[13px] text-muted mt-1">Adicione as camisetas que deseja encomendar</p>
+                  <p className="text-[13px] text-muted mt-1">Adicione quantas camisetas quiser com cores e tamanhos diferentes</p>
                 </div>
 
                 <div className="mb-4">
@@ -254,8 +254,8 @@ const Index = () => {
             {step === 3 && (
               <div className="animate-fadeUp">
                 <div className="my-6 mb-5">
-                  <h2 className="font-bebas text-[26px] tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent">Revisão</h2>
-                  <p className="text-[13px] text-muted mt-1">Confira todos os dados antes de confirmar</p>
+                  <h2 className="font-bebas text-[26px] tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent">Confirmar Pedido</h2>
+                  <p className="text-[13px] text-muted mt-1">Verifique todos os dados antes de enviar</p>
                 </div>
 
                 <div className="bg-card border border-border rounded overflow-hidden mb-3.5">
@@ -286,6 +286,8 @@ const Index = () => {
                   </div>
                 </div>
 
+                <Field label="Observações" id="obs" value={obs} onChange={setObs} placeholder="Alguma dúvida ou informação adicional..." multiline />
+
                 <div className="flex gap-2.5 mt-7">
                   <button onClick={() => goTo(2)} className="py-4 px-4.5 bg-transparent border-[1.5px] border-[#333] text-[#666] font-oswald text-[15px] font-semibold tracking-[2px] uppercase rounded-sm cursor-pointer active:scale-[.98]">←</button>
                   <button onClick={submit} disabled={submitting} className="flex-1 py-4 bg-gradient-to-br from-gold to-gold-light text-[#0a0a0a] font-oswald text-[15px] font-bold tracking-[2px] uppercase rounded-sm cursor-pointer transition-opacity hover:opacity-90 active:scale-[.98] disabled:opacity-50">
@@ -300,13 +302,13 @@ const Index = () => {
         {/* SUCCESS */}
         {page === 'form' && showSuccess && (
           <div className="text-center py-16 px-6 animate-fadeUp">
-            <div className="text-7xl mb-5">🎉</div>
+            <div className="text-7xl mb-5">🏍️</div>
             <h2 className="font-bebas text-4xl tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent mb-3">Pedido Registrado!</h2>
             <p className="text-sm text-[#9a8a6a] leading-relaxed max-w-[340px] mx-auto mb-2.5">
-              Obrigado, <strong>{nome.split(' ')[0]}</strong>! Seu pedido de camisetas foi registrado com sucesso.
+              Obrigado, <strong>{nome.split(' ')[0]}</strong>! Seu pedido foi salvo. Entraremos em contato pelo WhatsApp para confirmar os detalhes.
             </p>
-            <p className="text-sm text-[#9a8a6a] leading-relaxed max-w-[340px] mx-auto mb-6">
-              Você será contatado via WhatsApp para confirmar o pagamento.
+            <p className="text-sm text-[#555] leading-relaxed max-w-[340px] mx-auto mb-6">
+              Até o 4º Encontro Nacional Nação Estradeira!<br />04 a 07 de junho de 2026 · Teresina/PI 🤘
             </p>
             <div className="flex flex-col gap-3 items-center">
               <button onClick={() => switchPage('consolidado')} className="inline-flex items-center gap-2 bg-gold/10 border-[1.5px] border-gold rounded-sm px-6 py-3.5 text-gold font-oswald text-sm tracking-[2px] uppercase cursor-pointer hover:bg-gold/[.18] transition-colors">

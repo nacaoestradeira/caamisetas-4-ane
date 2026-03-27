@@ -1,6 +1,6 @@
 export const GAS_URL = 'https://script.google.com/macros/s/AKfycbypaGUP_zmVPsECCuaXLECy6S-QQqDp6Xg3w78vPMw2NeeYyFP4BwhUsGu3CnYpLR1V/exec';
 export const TAM_ORDEM = ['Infantil', 'PP', 'P', 'M', 'G', 'GG', 'XGG'];
-export const STEP_NAMES = ['Identificação', 'Montar Pedido', 'Revisão'];
+export const STEP_NAMES = ['Identificação', 'Montar Pedido', 'Confirmar Pedido'];
 
 export interface CamisetaItem {
   cor: string;
