@@ -202,7 +202,7 @@ const Index = () => {
                   </div>
                 )}
 
-                <Field label="Observações" id="obs" value={obs} onChange={setObs} placeholder="Alguma observação especial?" multiline />
+                {/* Observações moved to Step 3 */}
 
                 <div className="flex gap-2.5 mt-7">
                   <button onClick={() => goTo(2)} className="flex-1 py-4 bg-gradient-to-br from-gold to-gold-light text-[#0a0a0a] font-oswald text-[15px] font-bold tracking-[2px] uppercase rounded-sm cursor-pointer transition-opacity hover:opacity-90 active:scale-[.98]">
