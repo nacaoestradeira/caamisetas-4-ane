@@ -36,7 +36,6 @@ const Header = () => (
           className="w-full h-auto"
         />
       </div>
-      <p className="text-[11px] text-muted text-center tracking-wide">Modelo oficial — camiseta preta sublimada</p>
     </div>
   </div>
 );

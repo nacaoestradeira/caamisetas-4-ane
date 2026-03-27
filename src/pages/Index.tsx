@@ -8,6 +8,20 @@ import { ItemTags } from '@/components/nacao/ItemTags';
 import { useAppToast } from '@/hooks/useToast';
 import { CamisetaItem, GAS_URL, STEP_NAMES } from '@/lib/constants';
 
+const Field = ({ label, required, value, onChange, id, placeholder, type = 'text', multiline = false, error = false }: any) => (
+  <div className="mb-4">
+    <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-2">
+      {label} {required && <span className="text-gold-light">*</span>}
+    </label>
+    {multiline ? (
+      <textarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors resize-y min-h-[72px] ${error ? 'border-danger' : 'border-border focus:border-gold'}`} />
+    ) : (
+      <input type={type} value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors ${error ? 'border-danger' : 'border-border focus:border-gold'}`} />
+    )}
+    {error && <p className="text-[11px] text-danger mt-1">Campo obrigatório.</p>}
+  </div>
+);
+
 const Index = () => {
   const { toast, showToast } = useAppToast();
   const [page, setPage] = useState<'form' | 'consolidado'>('form');
@@ -52,7 +66,9 @@ const Index = () => {
   const goTo = useCallback((n: number) => {
     if (n > step && !validate(step)) return;
     setStep(n);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      document.getElementById('form-area')?.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
   }, [step, validate]);
 
   const openModal = (idx = -1) => {
@@ -107,21 +123,6 @@ const Index = () => {
     setPage(p);
     if (p === 'form') setShowSuccess(false);
   };
-
-  const Field = ({ label, required, value, onChange, id, placeholder, type = 'text', multiline = false }: any) => (
-    <div className="mb-4">
-      <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-2">
-        {label} {required && <span className="text-gold-light">*</span>}
-      </label>
-      {multiline ? (
-        <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors resize-y min-h-[72px] ${errors[id] ? 'border-danger' : 'border-border focus:border-gold'}`} />
-      ) : (
-        <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors ${errors[id] ? 'border-danger' : 'border-border focus:border-gold'}`} />
-      )}
-      {errors[id] && <p className="text-[11px] text-danger mt-1">Campo obrigatório.</p>}
-    </div>
-  );
-
   const totalCamisetas = pedidos.reduce((a, p) => a + p.quantidade, 0);
 
   return (
@@ -129,7 +130,7 @@ const Index = () => {
       <Header />
 
       {/* Nav Tabs */}
-      <div className="flex max-w-[560px] mx-auto border-b-2 border-[#1e1e1e]">
+      <div id="form-area" className="flex max-w-[560px] mx-auto border-b-2 border-[#1e1e1e]">
         <button
           onClick={() => switchPage('form')}
           className={`flex-1 py-3.5 px-2 font-oswald text-[13px] font-semibold tracking-[2px] uppercase bg-transparent border-none cursor-pointer border-b-2 -mb-[2px] transition-colors ${page === 'form' ? 'text-gold-light border-gold-light' : 'text-muted border-transparent'}`}
@@ -167,9 +168,9 @@ const Index = () => {
                   <p className="text-[13px] text-muted mt-1">Seus dados para registro e contato sobre o pedido</p>
                 </div>
 
-                <Field label="Nome completo" required id="nome" value={nome} onChange={setNome} placeholder="Seu nome completo" />
-                <Field label="WhatsApp" required id="telefone" value={telefone} onChange={setTelefone} placeholder="(00) 00000-0000" type="tel" />
-                <Field label="Cidade e Estado" required id="cidade" value={cidade} onChange={setCidade} placeholder="Ex: Cuiabá – MT" />
+                <Field label="Nome completo" required error={errors.nome} value={nome} onChange={setNome} placeholder="Seu nome completo" />
+                <Field label="WhatsApp" required error={errors.telefone} value={telefone} onChange={setTelefone} placeholder="(00) 00000-0000" type="tel" />
+                <Field label="Cidade e Estado" required error={errors.cidade} value={cidade} onChange={setCidade} placeholder="Ex: Cuiabá – MT" />
 
                 <div className="mb-4">
                   <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-2">
@@ -197,8 +198,8 @@ const Index = () => {
                       <span>📦</span>
                        <div><strong className="text-gold-light block mb-1">Atenção — Envio pelos Correios</strong>O valor da camiseta será cobrado para confecção. O frete será calculado após a confirmação e informado via WhatsApp — deverá ser pago separadamente antes do envio.</div>
                     </div>
-                    <Field label="Endereço completo" required id="endereco" value={endereco} onChange={setEndereco} placeholder="Rua, número, bairro, cidade, UF" />
-                    <Field label="CEP" required id="cep" value={cep} onChange={setCep} placeholder="00000-000" />
+                    <Field label="Endereço completo" required error={errors.endereco} value={endereco} onChange={setEndereco} placeholder="Rua, número, bairro, cidade, UF" />
+                    <Field label="CEP" required error={errors.cep} value={cep} onChange={setCep} placeholder="00000-000" />
                   </div>
                 )}
 
@@ -300,7 +301,7 @@ const Index = () => {
                   )}
                 </div>
 
-                <Field label="Observações" id="obs" value={obs} onChange={setObs} placeholder="Alguma dúvida ou informação adicional..." multiline />
+                <Field label="Observações" value={obs} onChange={setObs} placeholder="Alguma dúvida ou informação adicional..." multiline />
 
                 <div className="flex gap-2.5 mt-7">
                   <button onClick={() => goTo(2)} className="py-4 px-4.5 bg-transparent border-[1.5px] border-[#333] text-[#666] font-oswald text-[15px] font-semibold tracking-[2px] uppercase rounded-sm cursor-pointer active:scale-[.98]">←</button>
