@@ -286,6 +286,20 @@ const Index = () => {
                   </div>
                 </div>
 
+                {/* Avisos de custo na confirmação */}
+                <div className="space-y-2.5 mb-4">
+                  <div className="flex gap-2.5 items-start bg-gold/[.08] border border-gold/30 rounded p-3 text-xs text-[#c0a060] leading-relaxed">
+                    <span>📦</span>
+                    <div><strong className="text-gold-light block mb-1">Custo de transporte até Teresina</strong>As camisetas serão confeccionadas e despachadas para Teresina/PI. Haverá um custo adicional de transporte que será informado via WhatsApp.</div>
+                  </div>
+                  {entrega === 'Entrega no Endereço' && (
+                    <div className="flex gap-2.5 items-start bg-gold/[.08] border border-gold/30 rounded p-3 text-xs text-[#c0a060] leading-relaxed">
+                      <span>🚚</span>
+                      <div><strong className="text-gold-light block mb-1">Custo de envio pelos Correios</strong>Além do transporte até Teresina, haverá o custo de despacho pelos Correios até o endereço informado. O frete será calculado e informado via WhatsApp antes do envio.</div>
+                    </div>
+                  )}
+                </div>
+
                 <Field label="Observações" id="obs" value={obs} onChange={setObs} placeholder="Alguma dúvida ou informação adicional..." multiline />
 
                 <div className="flex gap-2.5 mt-7">
