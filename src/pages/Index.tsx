@@ -108,19 +108,22 @@ const Index = () => {
     if (p === 'form') setShowSuccess(false);
   };
 
-  const Field = ({ label, required, value, onChange, id, placeholder, type = 'text', multiline = false }: any) => (
-    <div className="mb-4">
-      <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-2">
-        {label} {required && <span className="text-gold-light">*</span>}
-      </label>
-      {multiline ? (
-        <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors resize-y min-h-[72px] ${errors[id] ? 'border-danger' : 'border-border focus:border-gold'}`} />
-      ) : (
-        <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors ${errors[id] ? 'border-danger' : 'border-border focus:border-gold'}`} />
-      )}
-      {errors[id] && <p className="text-[11px] text-danger mt-1">Campo obrigatório.</p>}
-    </div>
-  );
+  return null; // placeholder to keep line structure
+};
+
+const Field = ({ label, required, value, onChange, id, placeholder, type = 'text', multiline = false, error = false }: any) => (
+  <div className="mb-4">
+    <label className="block font-oswald font-medium text-[11px] tracking-[2px] uppercase text-[#a09070] mb-2">
+      {label} {required && <span className="text-gold-light">*</span>}
+    </label>
+    {multiline ? (
+      <textarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors resize-y min-h-[72px] ${error ? 'border-danger' : 'border-border focus:border-gold'}`} />
+    ) : (
+      <input type={type} value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-[#161616] border-[1.5px] rounded-sm text-foreground font-barlow text-[15px] px-3.5 py-3 outline-none transition-colors ${error ? 'border-danger' : 'border-border focus:border-gold'}`} />
+    )}
+    {error && <p className="text-[11px] text-danger mt-1">Campo obrigatório.</p>}
+  </div>
+);
 
   const totalCamisetas = pedidos.reduce((a, p) => a + p.quantidade, 0);
 

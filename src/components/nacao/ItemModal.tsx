@@ -124,9 +124,6 @@ const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps
           <div className="grid grid-cols-2 gap-2">
             {['Curta', 'Longa'].map(m => (
               <RadioOption key={m} name="m-manga" value={m} checked={manga === m} onChange={setManga}>
-                <span className="w-4 h-4 border-2 border-[#444] rounded-full flex-shrink-0 flex items-center justify-center" style={manga === m ? { borderColor: 'hsl(40,73%,47%)', background: 'hsl(40,73%,47%)' } : {}}>
-                  {manga === m && <span className="w-1.5 h-1.5 bg-[#0a0a0a] rounded-full" />}
-                </span>
                 Manga {m}
               </RadioOption>
             ))}
