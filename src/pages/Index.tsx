@@ -195,7 +195,7 @@ const Index = () => {
                   <div className="mt-3.5 p-4 bg-[#141414] border border-dashed border-border rounded-sm animate-fadeUp">
                     <div className="flex gap-2.5 items-start bg-gold/[.08] border border-gold/30 rounded p-3 mb-3.5 text-xs text-[#c0a060] leading-relaxed">
                       <span>📦</span>
-                      <div><strong className="text-gold-light block mb-1">Envio pelos Correios</strong>O frete será calculado separadamente e informado via WhatsApp após o pedido.</div>
+                       <div><strong className="text-gold-light block mb-1">Atenção — Envio pelos Correios</strong>O valor da camiseta será cobrado para confecção. O frete será calculado após a confirmação e informado via WhatsApp — deverá ser pago separadamente antes do envio.</div>
                     </div>
                     <Field label="Endereço completo" required id="endereco" value={endereco} onChange={setEndereco} placeholder="Rua, número, bairro, cidade, UF" />
                     <Field label="CEP" required id="cep" value={cep} onChange={setCep} placeholder="00000-000" />
