@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Pedido, CamisetaItem, GAS_URL, TAM_ORDEM, nomeModelo } from '@/lib/constants';
+import tabelaMangaCurta from '@/assets/tabela-manga-curta.jpg';
+import tabelaMangaLonga from '@/assets/tabela-manga-longa.jpg';
 
 interface EditModalProps {
   open: boolean;
