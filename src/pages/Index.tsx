@@ -301,7 +301,7 @@ const Index = () => {
                   )}
                 </div>
 
-                <Field label="Observações" id="obs" value={obs} onChange={setObs} placeholder="Alguma dúvida ou informação adicional..." multiline />
+                <Field label="Observações" value={obs} onChange={setObs} placeholder="Alguma dúvida ou informação adicional..." multiline />
 
                 <div className="flex gap-2.5 mt-7">
                   <button onClick={() => goTo(2)} className="py-4 px-4.5 bg-transparent border-[1.5px] border-[#333] text-[#666] font-oswald text-[15px] font-semibold tracking-[2px] uppercase rounded-sm cursor-pointer active:scale-[.98]">←</button>
