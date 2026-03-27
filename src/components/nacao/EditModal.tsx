@@ -244,14 +244,18 @@ const EditModal = ({ open, pedido, onClose, onSaved, onDeleted, showToast }: Edi
                       <div key={m} className="relative">
                         <input type="radio" name={`ei-manga-${i}`} value={m} checked={(item.manga || 'Curta') === m} onChange={() => updateItem(i, 'manga', m)} className="absolute opacity-0 w-0 h-0 peer" id={`emng-${m}-${i}`} />
                         <label htmlFor={`emng-${m}-${i}`} className="flex items-center gap-2 bg-[#161616] border-[1.5px] border-border rounded-sm px-3 py-2.5 cursor-pointer text-sm text-[#c0b090] transition-all peer-checked:border-gold peer-checked:bg-gold/[.07] peer-checked:text-gold-light">
-                          <span className="w-4 h-4 border-2 border-[#444] rounded-full flex-shrink-0 flex items-center justify-center" style={(item.manga || 'Curta') === m ? { borderColor: 'hsl(40,73%,47%)', background: 'hsl(40,73%,47%)' } : {}}>
-                            {(item.manga || 'Curta') === m && <span className="w-1.5 h-1.5 bg-[#0a0a0a] rounded-full" />}
-                          </span>
                           Manga {m}
                         </label>
                       </div>
                     ))}
                   </div>
+                  {/* Tabela de medidas */}
+                  {(item.manga || 'Curta') && (
+                    <div className="mt-3 bg-[#111] border border-[#222] rounded overflow-hidden">
+                      <p className="font-oswald text-[10px] tracking-[2px] uppercase text-gold px-3 py-2 border-b border-[#222]">📏 Tabela de medidas — Manga {item.manga || 'Curta'}</p>
+                      <img src={(item.manga || 'Curta') === 'Longa' ? tabelaMangaLonga : tabelaMangaCurta} alt={`Tabela de medidas manga ${item.manga || 'Curta'}`} className="w-full" />
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
