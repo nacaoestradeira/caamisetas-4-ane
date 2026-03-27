@@ -1,4 +1,7 @@
 import { CamisetaItem } from '@/lib/constants';
+import { useState, useEffect } from 'react';
+import tabelaMangaCurta from '@/assets/tabela-manga-curta.jpg';
+import tabelaMangaLonga from '@/assets/tabela-manga-longa.jpg';
 
 interface ItemModalProps {
   open: boolean;
@@ -7,8 +10,6 @@ interface ItemModalProps {
   onSave: (item: CamisetaItem) => void;
   initial?: CamisetaItem;
 }
-
-import { useState, useEffect } from 'react';
 
 const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps) => {
   const [cor, setCor] = useState('');
