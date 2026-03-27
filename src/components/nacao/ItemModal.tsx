@@ -61,8 +61,8 @@ const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps
 
   const SizeChip = ({ name, value, checked, onChange }: any) => (
     <div className="relative">
-      <input type="radio" name={name} value={value} checked={checked} onChange={() => onChange(value)} className="absolute opacity-0 w-0 h-0 peer" id={`${name}-${value}`} />
-      <label htmlFor={`${name}-${value}`} className="flex items-center justify-center w-14 h-11 bg-[#161616] border-[1.5px] border-border rounded-sm font-oswald text-[15px] font-semibold tracking-[1px] text-[#a09070] cursor-pointer transition-all peer-checked:border-gold peer-checked:bg-gold/10 peer-checked:text-gold-light">
+      <input type="radio" name={name} value={value} checked={checked} onChange={() => onChange(value)} className="absolute opacity-0 w-0 h-0" id={`${name}-${value}`} />
+      <label htmlFor={`${name}-${value}`} className={`flex items-center justify-center w-14 h-11 bg-[#161616] border-[1.5px] rounded-sm font-oswald text-[15px] font-semibold tracking-[1px] cursor-pointer transition-all ${checked ? 'border-gold bg-gold/10 text-gold-light' : 'border-border text-[#a09070]'}`}>
         {value === 'Infantil' ? 'INF' : value}
       </label>
     </div>
