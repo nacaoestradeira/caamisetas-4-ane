@@ -1,4 +1,7 @@
 import { CamisetaItem } from '@/lib/constants';
+import { useState, useEffect } from 'react';
+import tabelaMangaCurta from '@/assets/tabela-manga-curta.jpg';
+import tabelaMangaLonga from '@/assets/tabela-manga-longa.jpg';
 
 interface ItemModalProps {
   open: boolean;
@@ -7,8 +10,6 @@ interface ItemModalProps {
   onSave: (item: CamisetaItem) => void;
   initial?: CamisetaItem;
 }
-
-import { useState, useEffect } from 'react';
 
 const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps) => {
   const [cor, setCor] = useState('');
@@ -128,6 +129,13 @@ const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps
             ))}
           </div>
           <ErrMsg show={!!errors.manga} text="Selecione o tipo de manga." />
+          {/* Tabela de medidas */}
+          {manga && (
+            <div className="mt-3 bg-[#111] border border-[#222] rounded overflow-hidden">
+              <p className="font-oswald text-[10px] tracking-[2px] uppercase text-gold px-3 py-2 border-b border-[#222]">📏 Tabela de medidas — Manga {manga}</p>
+              <img src={manga === 'Longa' ? tabelaMangaLonga : tabelaMangaCurta} alt={`Tabela de medidas manga ${manga}`} className="w-full" />
+            </div>
+          )}
         </div>
 
         <div className="flex gap-2.5 mt-5">
