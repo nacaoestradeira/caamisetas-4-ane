@@ -27,7 +27,7 @@ const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps
         setQuantidade(String(initial.quantidade));
         setManga(initial.manga || 'Curta');
       } else {
-        setCor(''); setModelo(''); setTamanho(''); setQuantidade(''); setManga('');
+        setCor('Preta'); setModelo(''); setTamanho(''); setQuantidade(''); setManga('');
       }
       setErrors({});
     }
