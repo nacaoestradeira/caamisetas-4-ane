@@ -130,7 +130,7 @@ const Index = () => {
       <Header />
 
       {/* Nav Tabs */}
-      <div className="flex max-w-[560px] mx-auto border-b-2 border-[#1e1e1e]">
+      <div id="form-area" className="flex max-w-[560px] mx-auto border-b-2 border-[#1e1e1e]">
         <button
           onClick={() => switchPage('form')}
           className={`flex-1 py-3.5 px-2 font-oswald text-[13px] font-semibold tracking-[2px] uppercase bg-transparent border-none cursor-pointer border-b-2 -mb-[2px] transition-colors ${page === 'form' ? 'text-gold-light border-gold-light' : 'text-muted border-transparent'}`}
