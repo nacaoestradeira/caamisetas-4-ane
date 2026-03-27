@@ -49,9 +49,9 @@ const ItemModal = ({ open, editIndex, onClose, onSave, initial }: ItemModalProps
 
   const RadioOption = ({ name, value, checked, onChange, children }: any) => (
     <div className="relative">
-      <input type="radio" name={name} value={value} checked={checked} onChange={() => onChange(value)} className="absolute opacity-0 w-0 h-0 peer" id={`${name}-${value}`} />
-      <label htmlFor={`${name}-${value}`} className="flex items-center gap-2.5 bg-[#161616] border-[1.5px] border-border rounded-sm px-3 py-3 cursor-pointer text-sm font-medium text-[#c0b090] transition-all peer-checked:border-gold peer-checked:bg-gold/[.07] peer-checked:text-gold-light">
-        <span className="w-4 h-4 border-2 border-[#444] rounded-full flex-shrink-0 flex items-center justify-center transition-all peer-checked:border-gold peer-checked:bg-gold">
+      <input type="radio" name={name} value={value} checked={checked} onChange={() => onChange(value)} className="absolute opacity-0 w-0 h-0" id={`${name}-${value}`} />
+      <label htmlFor={`${name}-${value}`} className={`flex items-center gap-2.5 bg-[#161616] border-[1.5px] rounded-sm px-3 py-3 cursor-pointer text-sm font-medium transition-all ${checked ? 'border-gold bg-gold/[.07] text-gold-light' : 'border-border text-[#c0b090]'}`}>
+        <span className="w-4 h-4 border-2 rounded-full flex-shrink-0 flex items-center justify-center transition-all" style={checked ? { borderColor: 'hsl(40,73%,47%)', background: 'hsl(40,73%,47%)' } : { borderColor: '#444' }}>
           {checked && <span className="w-1.5 h-1.5 bg-[#0a0a0a] rounded-full" />}
         </span>
         {children}
