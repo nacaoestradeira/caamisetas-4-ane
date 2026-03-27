@@ -25,22 +25,25 @@ const EditModal = ({ open, pedido, onClose, onSaved, onDeleted, showToast }: Edi
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   // Sync when pedido changes
-  useState(() => {
-    if (pedido) {
-      setNome(pedido.nome);
-      setTelefone(pedido.telefone);
-      setCidade(pedido.cidade);
-      setEntrega(pedido.entrega);
-      setEndereco(pedido.endereco || '');
-      setCep(pedido.cep || '');
-      setObs(pedido.obs || '');
-      setItens(pedido.itens.map(i => ({ ...i, manga: i.manga || 'Curta' })));
-      setErrors({});
-      setSaving(false);
-      setDeleting(false);
-      setConfirmDelete(false);
-    }
-  });
+  const [prevPedidoId, setPrevPedidoId] = useState<number | null>(null);
+  if (pedido && pedido.id !== prevPedidoId) {
+    setPrevPedidoId(pedido.id);
+    setNome(pedido.nome);
+    setTelefone(pedido.telefone);
+    setCidade(pedido.cidade);
+    setEntrega(pedido.entrega);
+    setEndereco(pedido.endereco || '');
+    setCep(pedido.cep || '');
+    setObs(pedido.obs || '');
+    setItens(pedido.itens.map(i => ({ ...i, manga: i.manga || 'Curta' })));
+    setErrors({});
+    setSaving(false);
+    setDeleting(false);
+    setConfirmDelete(false);
+  }
+  if (!pedido && prevPedidoId !== null) {
+    setPrevPedidoId(null);
+  }
 
   const updateItem = (idx: number, field: string, value: any) => {
     setItens(prev => prev.map((it, i) => i === idx ? { ...it, [field]: field === 'quantidade' ? parseInt(value) : value } : it));
