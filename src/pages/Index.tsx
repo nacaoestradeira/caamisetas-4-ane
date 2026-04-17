@@ -27,6 +27,7 @@ const Field = ({ label, required, value, onChange, id, placeholder, type = 'text
 
 const Index = () => {
   const { toast, showToast } = useAppToast();
+  const { isAdmin, loading: authLoading } = useAuth();
   const [page, setPage] = useState<'form' | 'consolidado'>('form');
   const [step, setStep] = useState(1);
   const [showSuccess, setShowSuccess] = useState(false);
