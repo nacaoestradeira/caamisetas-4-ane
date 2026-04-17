@@ -132,6 +132,7 @@ const Index = () => {
   return (
     <div className="pb-20">
       <Header />
+      <AdminBar />
 
       {/* Nav Tabs */}
       <div id="form-area" className="flex max-w-[560px] mx-auto border-b-2 border-[#1e1e1e]">
@@ -358,16 +359,33 @@ const Index = () => {
         {/* CONSOLIDADO PAGE */}
         {page === 'consolidado' && (
           <div className="pt-6">
-            <div className="mb-5 flex justify-between items-start">
-              <div>
-                <h2 className="font-bebas text-[26px] tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent">Consolidado</h2>
-                <p className="text-xs text-muted mt-1">Visão geral de todos os pedidos</p>
+            {authLoading ? (
+              <div className="text-center py-12 text-muted text-sm">Verificando acesso...</div>
+            ) : !isAdmin ? (
+              <div className="text-center py-12">
+                <div className="text-5xl mb-3">🔒</div>
+                <h2 className="font-bebas text-2xl tracking-wider text-gold mb-2">Acesso restrito</h2>
+                <p className="text-sm text-muted mb-5 max-w-[360px] mx-auto">
+                  Esta área contém dados pessoais dos participantes (nome, contato, endereço) e é visível apenas para o administrador.
+                </p>
+                <Link to="/auth" className="inline-flex items-center gap-2 bg-gradient-to-br from-gold to-gold-shine text-black font-oswald text-sm font-bold tracking-[2px] uppercase px-6 py-3 rounded-sm hover:opacity-90 transition-opacity">
+                  🔐 Entrar como admin
+                </Link>
               </div>
-              <button onClick={() => { resetForm(); switchPage('form'); }} className="inline-flex items-center gap-2 bg-white/[.04] border-[1.5px] border-[#333] rounded-sm px-3 py-2 text-[#aaa] font-oswald text-xs tracking-[2px] uppercase cursor-pointer hover:bg-white/[.08] hover:border-[#666] hover:text-foreground transition-colors">
-                ➕ Novo pedido
-              </button>
-            </div>
-            <Consolidado showToast={showToast} />
+            ) : (
+              <>
+                <div className="mb-5 flex justify-between items-start">
+                  <div>
+                    <h2 className="font-bebas text-[26px] tracking-[2px] bg-gradient-to-br from-gold to-gold-shine bg-clip-text text-transparent">Consolidado</h2>
+                    <p className="text-xs text-muted mt-1">Visão geral de todos os pedidos</p>
+                  </div>
+                  <button onClick={() => { resetForm(); switchPage('form'); }} className="inline-flex items-center gap-2 bg-white/[.04] border-[1.5px] border-[#333] rounded-sm px-3 py-2 text-[#aaa] font-oswald text-xs tracking-[2px] uppercase cursor-pointer hover:bg-white/[.08] hover:border-[#666] hover:text-foreground transition-colors">
+                    ➕ Novo pedido
+                  </button>
+                </div>
+                <Consolidado showToast={showToast} />
+              </>
+            )}
           </div>
         )}
       </div>
