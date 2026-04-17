@@ -1,11 +1,14 @@
 import { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '@/components/nacao/Header';
 import Footer from '@/components/nacao/Footer';
 import Toast from '@/components/nacao/Toast';
 import ItemModal from '@/components/nacao/ItemModal';
 import Consolidado from '@/components/nacao/Consolidado';
+import AdminBar from '@/components/nacao/AdminBar';
 import { ItemTags } from '@/components/nacao/ItemTags';
 import { useAppToast } from '@/hooks/useToast';
+import { useAuth } from '@/hooks/useAuth';
 import { CamisetaItem, GAS_URL, STEP_NAMES } from '@/lib/constants';
 
 const Field = ({ label, required, value, onChange, id, placeholder, type = 'text', multiline = false, error = false }: any) => (
