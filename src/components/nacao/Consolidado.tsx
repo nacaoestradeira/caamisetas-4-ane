@@ -14,40 +14,32 @@ const Consolidado = ({ showToast }: ConsolidadoProps) => {
   const [loaded, setLoaded] = useState(false);
   const [editPedido, setEditPedido] = useState<Pedido | null>(null);
 
-  const load = useCallback(() => {
+  const load = useCallback(async () => {
     setLoading(true);
-    const cbName = '_gasCb_' + Date.now();
-    const timeout = setTimeout(() => {
-      delete (window as any)[cbName];
-      setLoading(false);
-      setData([]);
-      setLoaded(true);
-    }, 15000);
-
-    (window as any)[cbName] = (response: any) => {
-      clearTimeout(timeout);
-      delete (window as any)[cbName];
-      const old = document.getElementById('jsonpScript');
-      if (old) old.remove();
-      setLoading(false);
-      setLoaded(true);
-      if (response?.ok && Array.isArray(response.pedidos)) {
-        setData(response.pedidos.filter((p: Pedido) => p.status !== 'excluido'));
+    try {
+      const res = await fetch(`${GAS_URL}?t=${Date.now()}`, { method: 'GET', redirect: 'follow' });
+      const text = await res.text();
+      // GAS pode retornar JSON puro ou JSONP — tentar parse direto e fallback
+      let json: any = null;
+      try {
+        json = JSON.parse(text);
+      } catch {
+        const m = text.match(/^[^(]*\((.*)\)\s*;?\s*$/s);
+        if (m) json = JSON.parse(m[1]);
       }
-    };
-
-    const old = document.getElementById('jsonpScript');
-    if (old) old.remove();
-    const script = document.createElement('script');
-    script.id = 'jsonpScript';
-    script.src = `${GAS_URL}?callback=${cbName}&t=${Date.now()}`;
-    script.onerror = () => {
-      clearTimeout(timeout);
-      delete (window as any)[cbName];
+      if (json?.ok && Array.isArray(json.pedidos)) {
+        setData(json.pedidos.filter((p: Pedido) => p.status !== 'excluido'));
+      } else {
+        console.warn('[Consolidado] Resposta inesperada do GAS:', text.slice(0, 200));
+        setData([]);
+      }
+    } catch (e) {
+      console.error('[Consolidado] Falha ao carregar pedidos:', e);
+      setData([]);
+    } finally {
       setLoading(false);
       setLoaded(true);
-    };
-    document.body.appendChild(script);
+    }
   }, []);
 
   useEffect(() => { load(); }, [load]);
